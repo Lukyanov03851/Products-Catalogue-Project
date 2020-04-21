@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">Products-Catalogue-Project</string>
+    <string name="app_name">Catalogue</string>
+
+    <string name="search">Search</string>
+    <string name="local_data_retrieve_failure_message">Can\'t retrieve data</string>
+    <string name="readable_price">%.2f %s</string>
+    <string name="detail_readable_price">Price: %.2f %s</string>
+    <string name="recent">Recent</string>
+    <string name="open">Open</string>
+    <string name="close">close</string>
+
 </resources>
