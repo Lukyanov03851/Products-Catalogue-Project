@@ -9,15 +9,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_recent_product_list.*
 import ua.lukyanov.catalogue.R
 import ua.lukyanov.catalogue.databinding.FragmentRecentProductListBinding
 import ua.lukyanov.catalogue.ui.detail.ARG_PRODUCT_ID
-import ua.lukyanov.catalogue.ui.list.ProductListAdapter
+import ua.lukyanov.catalogue.ui.adapter.ProductListAdapter
+import ua.lukyanov.catalogue.util.DividerItemDecoration
 import javax.inject.Inject
-import javax.inject.Provider
 
 private const val TAG = "RecentProductsFragment"
 
@@ -25,7 +24,6 @@ class RecentProductListFragment : Fragment() {
 
     @Inject lateinit var factory: ViewModelProvider.Factory
     @Inject lateinit var mProductsAdapter: ProductListAdapter
-    @Inject lateinit var mLayoutManager: Provider<LinearLayoutManager>
 
     private lateinit var mProductsViewModel: RecentProductListViewModel
 
@@ -60,8 +58,9 @@ class RecentProductListFragment : Fragment() {
             val bundle = bundleOf(ARG_PRODUCT_ID to productId)
             Navigation.findNavController(view).navigate(R.id.action_detail, bundle)
         }
+
         rvProductList.apply {
-            layoutManager = mLayoutManager.get()
+            addItemDecoration(DividerItemDecoration(context, R.dimen.divider_left_padding_dimen))
             adapter = mProductsAdapter
         }
     }

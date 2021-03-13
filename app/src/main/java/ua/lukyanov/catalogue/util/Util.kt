@@ -6,6 +6,8 @@ import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -13,6 +15,15 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import ua.lukyanov.catalogue.R
+
+fun View?.hideKeyboard(){
+    val manager = this?.context?.getSystemService(Context.INPUT_METHOD_SERVICE)
+    val viewBinder = this?.windowToken
+    if (manager != null && viewBinder != null){
+        val inputManager = manager as InputMethodManager
+        inputManager.hideSoftInputFromWindow(viewBinder, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+}
 
 fun setColorFilter(drawable: Drawable, color: Int) {
     drawable.apply {

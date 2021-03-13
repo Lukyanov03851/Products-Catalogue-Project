@@ -10,6 +10,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ua.lukyanov.catalogue.network.ProductApiService
 import javax.inject.Singleton
 
+const val PRODUCTS_CATALOGUE_API_BASE_URL = "https://api.mercadolibre.com/"
+
 @Module
 class NetworkModule {
 
@@ -43,7 +45,4 @@ class NetworkModule {
         return retrofit.create(ProductApiService::class.java)
     }
 
-    companion object {
-        private const val PRODUCTS_CATALOGUE_API_BASE_URL = "https://api.mercadolibre.com/"
-    }
 }

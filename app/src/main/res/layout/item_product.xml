@@ -6,7 +6,7 @@
             type="ua.lukyanov.catalogue.model.Product"/>
         <variable
             name="handler"
-            type="ua.lukyanov.catalogue.ui.list.ProductListAdapter"/>
+            type="ua.lukyanov.catalogue.ui.adapter.ProductListAdapter"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,12 +14,14 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:onClick="@{()->handler.onItemClick(product.id)}"
-        android:layout_height="80dp">
+        android:paddingTop="@dimen/common_margin_half"
+        android:paddingBottom="@dimen/common_margin_half"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/imgProduct"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="@dimen/item_image_dimen"
+            android:layout_height="@dimen/item_image_dimen"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,6 +34,7 @@
             android:layout_marginStart="@dimen/common_margin"
             android:gravity="start"
             android:text="@{product.title}"
+            android:textSize="@dimen/primary_text_size"
             app:layout_constraintStart_toEndOf="@+id/imgProduct"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/tvProductPrice"
@@ -46,6 +49,7 @@
             android:layout_marginTop="@dimen/common_margin_half"
             android:layout_marginStart="@dimen/common_margin"
             android:gravity="start"
+            android:textSize="@dimen/secondary_text_size"
             android:text="@{@string/readable_price(product.price, product.currency)}"
             app:layout_constraintStart_toEndOf="@+id/imgProduct"
             app:layout_constraintTop_toBottomOf="@+id/tvProductTitle"

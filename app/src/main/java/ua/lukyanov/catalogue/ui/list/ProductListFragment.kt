@@ -1,11 +1,9 @@
 package ua.lukyanov.catalogue.ui.list
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -13,14 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_product_list.*
 import ua.lukyanov.catalogue.R
 import ua.lukyanov.catalogue.databinding.FragmentProductListBinding
+import ua.lukyanov.catalogue.ui.adapter.ProductListAdapter
 import ua.lukyanov.catalogue.ui.detail.ARG_PRODUCT_ID
+import ua.lukyanov.catalogue.util.DividerItemDecoration
+import ua.lukyanov.catalogue.util.hideKeyboard
 import javax.inject.Inject
-import javax.inject.Provider
 
 private const val TAG = "ProductListFragment"
 private const val ARG_SEARCH_TEXT = "search_text"
@@ -31,7 +30,6 @@ class ProductListFragment : Fragment() {
 
     @Inject lateinit var factory: ViewModelProvider.Factory
     @Inject lateinit var mProductsAdapter: ProductListAdapter
-    @Inject lateinit var mLayoutManager: Provider<LinearLayoutManager>
 
     private lateinit var mProductsViewModel: ProductListViewModel
 
@@ -78,7 +76,7 @@ class ProductListFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_detail, bundle)
         }
         rvProductList.apply {
-            layoutManager = mLayoutManager.get()
+            addItemDecoration(DividerItemDecoration(context, R.dimen.divider_left_padding_dimen))
             adapter = mProductsAdapter
         }
     }
@@ -116,7 +114,7 @@ class ProductListFragment : Fragment() {
     }
 
     fun submitSearchQuery(query: String){
-        hideKeyboard()
+        view.hideKeyboard()
         searchQueryText = query
         mProductsAdapter.clearItems()
         mProductsAdapter.notifyDataSetChanged()
@@ -128,15 +126,6 @@ class ProductListFragment : Fragment() {
         super.onSaveInstanceState(outState)
         outState.putBoolean(ARG_SEARCH_VIEW_ICONIFIED, searchView?.isIconified ?: false)
         outState.putString(ARG_SEARCH_TEXT, searchQueryText)
-    }
-
-    private fun hideKeyboard() {
-        val manager = view?.context?.getSystemService(Context.INPUT_METHOD_SERVICE)
-        val viewBinder = view?.windowToken
-        if (manager != null && viewBinder != null){
-            val inputManager = manager as InputMethodManager
-            inputManager.hideSoftInputFromWindow(viewBinder, InputMethodManager.HIDE_NOT_ALWAYS)
-        }
     }
 
 }

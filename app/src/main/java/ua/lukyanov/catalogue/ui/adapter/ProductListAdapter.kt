@@ -1,4 +1,4 @@
-package ua.lukyanov.catalogue.ui.list
+package ua.lukyanov.catalogue.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,6 @@ import ua.lukyanov.catalogue.databinding.ItemProductBinding
 import ua.lukyanov.catalogue.model.Product
 import ua.lukyanov.catalogue.util.inflateImage
 import java.util.*
-
 
 class ProductListAdapter : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
