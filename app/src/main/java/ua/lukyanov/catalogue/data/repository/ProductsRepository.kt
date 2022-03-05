@@ -29,6 +29,7 @@ class ProductsRepository @Inject constructor (
     }
 
     suspend fun dbSaveLastVisitedProduct(product: Product) {
+        if (product.id == null) return
         productDao.insert(ProductRef(product.id, System.currentTimeMillis()))
 
         val productsList = productDao.getAllProducts()

@@ -4,19 +4,19 @@ import com.google.gson.annotations.SerializedName
 
 data class Product(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
 
     @SerializedName("thumbnail")
-    val thumbnailUrl: String,
+    val thumbnailUrl: String?,
 
     @SerializedName("title")
-    val title: String,
+    val title: String?,
 
     @SerializedName("price")
-    val price: Double,
+    val price: Double?,
 
     @SerializedName("currency_id")
-    val currency: String
+    val currency: String?
 ){
     override fun toString(): String {
         return "Product(id='$id', thumbnailUrl='$thumbnailUrl', title='$title', price=$price, currency='$currency')"

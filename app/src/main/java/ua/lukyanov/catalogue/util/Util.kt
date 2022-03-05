@@ -35,7 +35,7 @@ fun setColorFilter(drawable: Drawable, color: Int) {
     }
 }
 
-fun inflateImage(context: Context, imgUrl: String, imageView: ImageView){
+fun inflateImage(context: Context, imgUrl: String?, imageView: ImageView){
     val circularProgressDrawable = CircularProgressDrawable(context)
     circularProgressDrawable.strokeWidth = 4f
     circularProgressDrawable.centerRadius = 20f
